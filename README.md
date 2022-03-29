@@ -6,7 +6,7 @@
 
 **实验结果：**
 
-![image-20220329170528509](C:\Users\12098\AppData\Roaming\Typora\typora-user-images\image-20220329170528509.png)
+![image-20220329170528509](.\Result\SparseEA_FsData5_N30_Gen1000.png)
 
 
 
