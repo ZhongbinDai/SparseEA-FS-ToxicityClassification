@@ -6,7 +6,7 @@
 
 **实验结果：**
 
-![image-20220329170528509](https://github.com/ZhongbinDai/SparseEA-FS-ToxicityClassification/tree/main/Result/SparseEA_FsData5_N30_Gen1000.png)
+![image-20220329170528509](https://github.com/ZhongbinDai/SparseEA-FS-ToxicityClassification/blob/main/Result/SparseEA_FsData5_N30_Gen1000.png)
 
 
 
