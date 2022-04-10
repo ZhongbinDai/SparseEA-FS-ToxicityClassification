@@ -1,66 +1,62 @@
 % -------------------------------------------------------------------------
-% é—ä¼ ç®—æ³•ï¼ˆGAï¼‰+ æ±‚è§£ç‰¹å¾é€‰æ‹©é—®é¢˜ï¼ˆFSï¼‰+ æ¯’æ€§åˆ†ç±»
-% @ä½œè€…ï¼šå†°ä¸­å‘†
-% @é‚®ç®±ï¼š1209805090@qq.com
-% @æ—¶é—´ï¼š2022.03.26
+% ÒÅ´«Ëã·¨£¨GA£©+ Çó½âÌØÕ÷Ñ¡ÔñÎÊÌâ£¨FS£©+ ¶¾ĞÔ·ÖÀà
+% @×÷Õß£º±ùÖĞ´ô
+% @ÓÊÏä£º1209805090@qq.com
+% @Ê±¼ä£º2022.03.26
 % -------------------------------------------------------------------------
-%% æ¸…ç©º
-clear;                                                                      % æ¸…é™¤æ‰€æœ‰å˜é‡
-close all;                                                                  % æ¸…å›¾
-clc;                                                                        % æ¸…å±
-%% å‚æ•°é…ç½®
-addpath(genpath('.\'));                                                     % å°†å½“å‰æ–‡ä»¶å¤¹ä¸‹çš„æ‰€æœ‰æ–‡ä»¶å¤¹éƒ½åŒ…æ‹¬è¿›è°ƒç”¨å‡½æ•°çš„ç›®å½•
-rng(0);                                                                     % éšæœºç§å­
+%% Çå¿Õ
+clear;                                                                      % Çå³ıËùÓĞ±äÁ¿
+close all;                                                                  % ÇåÍ¼
+clc;                                                                        % ÇåÆÁ
+%% ²ÎÊıÅäÖÃ
+addpath(genpath('.\'));                                                     % ½«µ±Ç°ÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼ş¼Ğ¶¼°üÀ¨½øµ÷ÓÃº¯ÊıµÄÄ¿Â¼
+% rng(0);                                                                     % Ëæ»úÖÖ×Ó
 
-populationSize = 30;                                                        % ç§ç¾¤è§„æ¨¡
-maxGeneration = 1000;                                                       % æœ€å¤§è¿›åŒ–ä»£æ•°
-crossoverRate = 0.6;                                                        % äº¤å‰æ¦‚ç‡
-mutationRate = 0.03;                                                        % å˜å¼‚æ¦‚ç‡
+populationSize = 30;                                                        % ÖÖÈº¹æÄ£
+maxGeneration = 1000;                                                       % ×î´ó½ø»¯´úÊı
+crossoverRate = 0.6;                                                        % ½»²æ¸ÅÂÊ
+mutationRate = 0.01;                                                        % ±äÒì¸ÅÂÊ
 
-% dataSetName = 'FsData2.mat';                                                % æ•°æ®é›†
-dataSetName = 'FsData5.mat';                                                % æ•°æ®é›†
-classificationModel = @predictOfCtree;                                      % å†³ç­–æ ‘åˆ†ç±»æ¨¡å‹
-% classificationModel = @predictOfSvm;                                      % SVMåˆ†ç±»æ¨¡å‹
+% dataSetName = 'FsData2.mat';                                                % Êı¾İ¼¯
+dataSetName = 'FsData5.mat';                                                % Êı¾İ¼¯
+classificationModel = @predictOfCtree;                                      % ¾ö²ßÊ÷·ÖÀàÄ£ĞÍ
+% classificationModel = @predictOfSvm;                                      % SVM·ÖÀàÄ£ĞÍ
 
-[model] = initModelOfFs(dataSetName, classificationModel);                  % é—®é¢˜å®šä¹‰
+[model] = initModelOfFs(dataSetName, classificationModel);                  % ÎÊÌâ¶¨Òå
 
-%% åˆå§‹åŒ–
-population = initialPopulation(populationSize, model);                      % åˆå§‹åŒ–ç§ç¾¤
-popFitness = getFitness(population, model);                                 % è®¡ç®—ç§ç¾¤é€‚åº”åº¦
-numOfDecVariables = size(population, 2);                                    % å†³ç­–å˜é‡ç»´åº¦
+%% ³õÊ¼»¯
+population = initialPopulation(populationSize, model);                      % ³õÊ¼»¯ÖÖÈº
+popFitness = getFitness(population, model);                                 % ¼ÆËãÖÖÈºÊÊÓ¦¶È
+numOfDecVariables = size(population, 2);                                    % ¾ö²ß±äÁ¿Î¬¶È
 
-bestIndividualSet = zeros(maxGeneration, numOfDecVariables);                % æ¯ä»£æœ€ä¼˜ä¸ªä½“é›†åˆ
-bestFitnessSet = zeros(maxGeneration, 1);                                   % æ¯ä»£æœ€é«˜é€‚åº”åº¦é›†åˆ
-avgFitnessSet = zeros(maxGeneration, 1);                                    % æ¯ä»£å¹³å‡é€‚åº”åº¦é›†åˆ
+bestIndividualSet = zeros(maxGeneration, numOfDecVariables);                % Ã¿´ú×îÓÅ¸öÌå¼¯ºÏ
+bestFitnessSet = zeros(maxGeneration, 1);                                   % Ã¿´ú×î¸ßÊÊÓ¦¶È¼¯ºÏ
+avgFitnessSet = zeros(maxGeneration, 1);                                    % Ã¿´úÆ½¾ùÊÊÓ¦¶È¼¯ºÏ
 
 
-%% è¿›åŒ–
+%% ½ø»¯
 for i = 1 : maxGeneration
     
     [bestIndividual, bestFitness, avgFitness] = getBestIndividualAndFitness(population, popFitness);
-    bestIndividualSet(i, :) = bestIndividual;                               % ç¬¬iä»£æœ€ä¼˜ä¸ªä½“
-    bestFitnessSet(i) = bestFitness;                                        % ç¬¬iä»£æœ€é«˜é€‚åº”åº¦
-    avgFitnessSet(i) = avgFitness;                                          % ç¬¬iä»£ç§ç¾¤å¹³å‡é€‚åº”åº¦
-    fprintf('ç¬¬%iä»£ç§ç¾¤çš„æœ€ä¼˜å€¼ï¼š%.3f\n', i, bestFitness);
+    bestIndividualSet(i, :) = bestIndividual;                               % µÚi´ú×îÓÅ¸öÌå
+    bestFitnessSet(i) = bestFitness;                                        % µÚi´ú×î¸ßÊÊÓ¦¶È
+    avgFitnessSet(i) = avgFitness;                                          % µÚi´úÖÖÈºÆ½¾ùÊÊÓ¦¶È
+    fprintf('µÚ%i´úÖÖÈºµÄ×îÓÅÖµ£º%.3f\n', i, bestFitness);
     if mod(i, 50) == 0
-        showEvolCurve(1, i, bestFitnessSet, avgFitnessSet);                 % æ˜¾ç¤ºè¿›åŒ–æ›²çº¿
+        showEvolCurve(1, i, bestFitnessSet, avgFitnessSet);                 % ÏÔÊ¾½ø»¯ÇúÏß
     end
     
     
-    newPopulation = selectionOperationOfTournament(population, popFitness);	% é€‰æ‹©æ“ä½œ
-    newPopulation = crossoverOperation(newPopulation, crossoverRate);	    % äº¤å‰æ“ä½œ
-    newPopulation = mutationOperationOf01(newPopulation, mutationRate);     % å˜å¼‚æ“ä½œ
+    newPopulation = selectionOperationOfTournament(population, popFitness);	% Ñ¡Ôñ²Ù×÷
+    newPopulation = crossoverOperation(newPopulation, crossoverRate);	    % ½»²æ²Ù×÷
+    newPopulation = mutationOperationOf01(newPopulation, mutationRate);     % ±äÒì²Ù×÷
 
-    newPopFitness = getFitness(newPopulation, model);                       % å­ä»£ç§ç¾¤é€‚åº”åº¦
-    [population, popFitness] = eliteStrategy(population, popFitness, newPopulation, newPopFitness, 2); % ç²¾è‹±ç­–ç•¥
+    newPopFitness = getFitness(newPopulation, model);                       % ×Ó´úÖÖÈºÊÊÓ¦¶È
+    [population, popFitness] = eliteStrategy(population, popFitness, newPopulation, newPopFitness, 2); % ¾«Ó¢²ßÂÔ
 end
 
-%% ç»“æœå‡ºå›¾
+%% ½á¹û³öÍ¼
 pngName = sprintf('%s_%s_N%d_Gen%d.png', 'GA', 'FsData5', populationSize, maxGeneration);
 dataSetPath = '..\Result\';
 saveas(gcf, [dataSetPath  pngName]);
-fprintf('åˆ†ç±»å‡†ç¡®ç‡æå‡ï¼š%.3f%%\n', (bestFitness - model.basePrecision) * 100);
-
-
-
-
+fprintf('·ÖÀà×¼È·ÂÊÌáÉı£º%.3f%%\n', (bestFitness - model.basePrecision) * 100);

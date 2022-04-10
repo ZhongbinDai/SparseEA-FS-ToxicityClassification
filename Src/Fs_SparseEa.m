@@ -10,16 +10,16 @@ close all;                                                                  % �
 clc;                                                                        % 清屏
 %% 参数配置
 addpath(genpath('.\'));                                                     % 将当前文件夹下的所有文件夹都包括进调用函数的目录
-rng(0);                                                                     % 随机种子
+% rng(0);                                                                   % 随机种子
 
 populationSize = 30;                                                        % 种群规模
 maxGeneration = 1000;                                                       % 最大进化代数
 
 
 % dataSetName = 'BaseData.mat';                                             % 数据集
-dataSetName = 'FsData5.mat';                                                % 数据集
+dataSetName = 'FsData2.mat';                                                % 数据集
 classificationModel = @predictOfCtree;                                      % 决策树分类模型
-% classificationModel = @predictOfSvm;                                        % SVM分类模型
+% classificationModel = @predictOfSvm;                                      % SVM分类模型
 
 [model] = initModelOfFs_SparseEa(dataSetName, classificationModel);         % 问题定义
 
@@ -48,6 +48,8 @@ for i = 1 : maxGeneration
     
     newPopFitness = getFitness(newPopulation, model);                       % 子代种群适应度
     [population, popFitness] = eliteStrategy(population, popFitness, newPopulation, newPopFitness, 2); % 精英策略
+    
+    model.featureScore = model.updateFeatureScore(population, popFitness);
 end
 
 %% 结果出图

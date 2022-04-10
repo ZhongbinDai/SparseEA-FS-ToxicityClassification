@@ -31,6 +31,7 @@ function [model] = initModelOfFs_SparseEa(dataSetName, classificationModel)
     model.classificationModel = classificationModel;                        % 分类模型
     model.initIndividual = @initIndividual;                                 % 初始化个体
 	model.getIndividualFitness = @getIndividualFitness;                     % 计算个体适应度
+    model.updateFeatureScore = @updateFeatureScore;
     
     model.variation = @variation;                                           % sparse种群交叉变异操作
     model.featureScore = getFeatureScore(model);                            % 特征评分
@@ -215,6 +216,14 @@ function [newPopulation] = variation(population, popFitness, model)
 end
 
 
+function featureScore = updateFeatureScore(population, popFitness)
+    [popFitness, index] = sort(popFitness);                             % 根据适应度从小到大排序
+    population = population(index, :);
+    individualScore = (1 : length(popFitness));
+    numOfDecVariables = size(population, 2);                            % 特征数
+    maskScore = population .* repmat(individualScore, [numOfDecVariables 1])';
+    featureScore = sum(maskScore)';
+end
 
 
 

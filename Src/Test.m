@@ -2,12 +2,13 @@
 clear;                                                                      % 清除所有变量
 close all;                                                                  % 清图
 clc;                                                                        % 清屏
-load('.\TestData\Fs_Data2.mat');
-load('.\TestData\Fs_Data4.mat');
+load('..\TestData\FsData2.mat');
+load('..\TestData\FsData4.mat');
+load('..\TestData\FsData5.mat');
 
 
 %%
-BaseData = Fs_Data4;
+BaseData = FsData4;
 sampleFeature = BaseData(:, 2:end);
 sampleLabel = BaseData(:, 1);
 rateOfTrain = 0.8;
@@ -20,7 +21,7 @@ fprintf('测试样本数：%d 分类正确数：%d 分类准确率:%f\n',length(
 
 
 %%
-BaseData = Fs_Data4;
+BaseData = FsData4;
 sampleFeature = BaseData(:, 2:end);
 sampleLabel = BaseData(:, 1);
 rateOfTrain = 0.8;

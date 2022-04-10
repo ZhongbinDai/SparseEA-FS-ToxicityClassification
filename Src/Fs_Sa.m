@@ -12,7 +12,7 @@ clc;                                                                        % �
 addpath(genpath('.\'));                                                     % 将当前文件夹下的所有文件夹都包括进调用函数的目录
 rng(0);                                                                     % 随机种子
 
-populationSize = 3;                                                         % 种群规模
+populationSize = 2;                                                         % 种群规模
 maxGeneration = 5000;                                                      % 最大进化代数
 
 % dataSetName = 'BaseData.mat';                                             % 数据集
